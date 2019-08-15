@@ -11,8 +11,10 @@ public class Main {
         String input = System.console().readLine();
         input.toUpperCase();
         while(input.equals("y")){
+            System.out.println(":");
+            String command = System.console().readLine();
             ProcessBuilder processBuilder = new ProcessBuilder();
-            processBuilder.command("bash","-c", "df");
+            processBuilder.command("bash","-c", command);
     
             try {
     
