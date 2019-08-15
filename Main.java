@@ -9,9 +9,9 @@ public class Main {
         System.out.println("Bienvenido a la consola \"inteligente\" ");
         System.out.println("Deseas iniciar? (Y/N)");
         String input = System.console().readLine();
-        input.toUpperCase();
+        input = input.toLowerCase();
         while(input.equals("y")){
-            System.out.println(":");
+            System.out.print(":");
             String command = System.console().readLine();
             ProcessBuilder processBuilder = new ProcessBuilder();
             processBuilder.command("bash","-c", command);
@@ -41,7 +41,7 @@ public class Main {
             }
             System.out.println("Deseas continuar? (Y/N)");
             input = System.console().readLine();
-            input.toUpperCase();
+            input = input.toLowerCase();
         }
         
     }
