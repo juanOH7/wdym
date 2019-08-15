@@ -6,36 +6,42 @@ public class Main {
     static public void main(String argv[]) {
         
         
-        
-        
-        
-        ProcessBuilder processBuilder = new ProcessBuilder();
-        processBuilder.command("bash","-c", "df");
-
-        try {
-
-            Process process = processBuilder.start();
-            StringBuilder output = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                output.append(line + "\n");
+        System.out.println("Bienvenido a la consola \"inteligente\" ");
+        System.out.println("Deseas iniciar? (Y/N)");
+        String input = System.console().readLine();
+        input.toUpperCase();
+        while(input.equals("y")){
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            processBuilder.command("bash","-c", "df");
+    
+            try {
+    
+                Process process = processBuilder.start();
+                StringBuilder output = new StringBuilder();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+    
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output.append(line + "\n");
+                }
+    
+                int exitVal = process.waitFor();
+                if (exitVal == 0) {
+                    System.out.println(output);
+                } else {
+                    System.out.println("Error!");
+                }
+    
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-
-            int exitVal = process.waitFor();
-            if (exitVal == 0) {
-                System.out.println(output);
-                System.exit(0);
-            } else {
-                System.out.println("Sdduccess!");
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("Deseas continuar? (Y/N)");
+            input = System.console().readLine();
+            input.toUpperCase();
         }
+        
     }
 
 }
